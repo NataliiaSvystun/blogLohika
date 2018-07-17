@@ -1,0 +1,2 @@
+# blogLohika
+JS project
