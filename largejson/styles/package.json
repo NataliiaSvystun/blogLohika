@@ -10,7 +10,9 @@
   "private": true,
   "dependencies": {
     "express": "^4.16.4",
-    "mongodb": "^3.1.8"
+    "mongodb": "^3.1.8",
+    "node-sass": "^4.9.4",
+    "sass": "^1.14.3"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
@@ -22,7 +24,8 @@
   "scripts": {
     "client": "cd client && npm run start",
     "server": "nodemon server.js",
+	"sass" : "sass --watch client/src/styles/scss:src/styles/css"
     "start": "node server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run sass\""
   }
 }

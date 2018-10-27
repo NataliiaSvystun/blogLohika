@@ -1,0 +1,22 @@
+{
+  "name": "bloglohika",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {   
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.4"
+  },
+    "devDependencies": {
+    "node-sass": "^4.7.2"
+  },
+  "scripts": {
+    "sass:watch": "node-sass -w src/styles/scss -o src/styles/css",
+    "sass:build": "node-sass src/styles/scss -o src/styles/css --source-map true",
+    "start": "npm run sass:build && react-scripts start",
+    "build": "npm run sass:build && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+    "proxy": "http://localhost:5000/"
+}
