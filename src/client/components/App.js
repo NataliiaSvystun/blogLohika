@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './app.css';
-import ReactImage from './react.png';
+import '../app.css';
 
 export default class App extends Component {
   state = { username: null };
@@ -9,11 +8,16 @@ export default class App extends Component {
     fetch('/api/getUsername')
       .then(res => res.json())
       .then(user => this.setState({ username: user.username }));
-  }  
- 
+	fetch('/api/getColors')
+      .then(res => res.json())
+      .then(colorsFromServer => this.setState({ colorsFromServer: colors }));
+  };  
+  
   render() {
-	   const colors = [
-  {
+	   const { colorsFromServer } = this.state;
+	   console.log(colorsFromServer); 
+	   const colorsFromApp = [
+ {
 	  "name": "Green",
 	  "description": "lalalal"
 	  },
@@ -25,21 +29,18 @@ export default class App extends Component {
 	  "name": "Blue",
 	  "description": "vavava"
  }
-]
-  
-  const Display = ({name, description}) =>
-		<h1>{name}</h1>
-		<ul> {colors.map((color, i)=>
-		<li>{color.name}</li>)}
-		</ul>
-
+];
+	 
+console.log(colorsFromApp); 
     const { username } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
-		
-      </div>
+       	<ul> {colorsFromApp.map((colors, i)=>
+			<li>{colors.name}, {colors.description}</li>
+			)}			
+		</ul>
+		   
+	   </div>
     );
   }
 }
