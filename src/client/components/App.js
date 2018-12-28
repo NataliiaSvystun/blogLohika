@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { simpleAction } from '../actions/SimpleAction'
 import '../app.css';
 
-export default class App extends Component {
+class App extends Component {
   state = { username: null };
 
   componentDidMount() {
@@ -10,9 +12,13 @@ export default class App extends Component {
       .then(user => this.setState({ username: user.username }));
 	fetch('/api/getColors')
       .then(res => res.json())
-      .then(colorsFromServer => this.setState({ colorsFromServer: colors }));
+      .then(colorsFromServer => this.setState({ colorsFromServer: colorsFromServer.colors }));
   };  
-  
+	
+	simpleAction = (event) => {
+		this.props.simpleAction();
+	 }
+
   render() {
 	   const { colorsFromServer } = this.state;
 	   console.log(colorsFromServer); 
@@ -39,8 +45,20 @@ console.log(colorsFromApp);
 			<li>{colors.name}, {colors.description}</li>
 			)}			
 		</ul>
-		   
+		<button onClick={this.simpleAction}>Test redux action</button>
+		<pre>
+ {
+  JSON.stringify(this.props)
+ }
+</pre>
 	   </div>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+	simpleAction: () => dispatch(simpleAction())
+ })
+
+
+export default connect(state => ({ username: state.username}), mapDispatchToProps)(App);
